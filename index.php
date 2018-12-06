@@ -1,0 +1,598 @@
+<?php
+// Always start this first
+session_start();
+
+
+$username="user";
+$password ="password";
+
+if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true){
+    header("Location:index.php");
+}
+    if (isset($_POST['username']) && isset($_POST['password'])){
+     if ($_POST['username'] == $username && $_POST['password'] == $password)
+   {
+        $_SESSION['logged_in'] = true;
+        header("Location: index.php");
+   }
+
+    }
+
+
+
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $message = $_POST['message'];
+    $from = 'From: $email'; 
+    $to = 'nosobaseki@gmail.com'; 
+    $subject = 'Hello';
+    $human = $_POST['human'];
+            
+    $body = "From: $name\n E-Mail: $email\n Message:\n $message";
+                
+    if ($_POST['submit']) {
+    if ($name != '' && $email != '') {
+        if ($human == '4') {                 
+            if (mail ($to, $subject, $body, $from)) { 
+            echo '<p>Your message has been sent!</p>';
+        } else { 
+            echo '<p>Something went wrong, go back and try again!</p>'; 
+        } 
+    } else if ($_POST['submit'] && $human != '4') {
+        echo '<p>You answered the anti-spam question incorrectly!</p>';
+    }
+    } else {
+        echo '<p>You need to fill in all required fields!!</p>';
+    }
+}
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  $name = test_input($_POST["name"]);
+  $email = test_input($_POST["email"]);
+  $message = test_input($_POST["message"]);
+  
+}
+
+function test_input($data) {
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
+}
+
+$to = "nosobaseki@gmail.com";
+    $subject = "You have new mail!";
+    $message = "You have a new signup!\r\n\r\n";
+    $message .= "Name: $name \r\n";
+    $message .= "Email: $email \r\n";
+    $cookie_name = "user";
+$cookie_value = "John Doe";
+setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // 86400 = 1 day
+?>
+
+<!--  -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Naija Soul Resturant</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="proj.css" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Gamja Flower' rel='stylesheet'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Sans:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.css">
+    <link rel="stylesheet" href="thumbnail-gallery.css">
+    <iframe width="0" height="0" src="davido.mp3" frameborder="0" allowfullscreen></iframe>
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
+    
+<style>
+    
+         .nav{
+    /*background-color: #ffffff;*/
+    color:white;
+    list-style: none;
+    text-align: right;
+    padding: 20px 0 25px 0;}
+    .nav > li{
+        display: inline-block;
+        padding:0 25px 0 25px;
+        /*font-family: "Chalkduster", fantasy;*/
+        /*font-family: 'Kumar One Outline';*/
+        font-family: 'Gamja Flower';
+        font-size: 15px;
+    }
+        .nav > li > a {
+            text-decoration: none;
+            color:green;
+            float: right;}
+    .nav > li > a:hover{
+        color:#c1c1c1;}
+    }
+    }
+}
+.resta{
+
+    background-image: url("images/resta.jpeg");
+
+    /* Set a specific height */
+    width:100%; 
+    height: 100vh;
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;}
+
+.foodtext {
+    font-family: 'Gamja Flower';
+    color: green;
+    
+    padding-left: 100px;
+}
+.back {background-image: url("images/womans.jpg");
+      background-repeat: no-repeat;
+               background-size: cover;
+              background-position: center center;
+               height:100vh;
+               background-attachment: fixed;
+              width:100%;}
+ body {color:green;
+       background-color: }
+ footer {
+/*   position: fixed;*/
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   background-color: white;
+   color: green;
+   text-align: center;
+   font-family:"Chalkduster", fantasy;
+}
+footer a {
+    text-decoration: none;
+}
+input[type=text], select, textarea {
+    width: 100%; /* Full width */
+    padding: 12px; /* Some padding */  
+    border: 1px solid #ccc; /* Gray border */
+    border-radius: 4px; /* Rounded borders */
+    box-sizing: border-box; /* Make sure that padding and width stays in place */
+    margin-top: 6px; /* Add a top margin */
+    margin-bottom: 16px; /* Bottom margin */
+    resize: vertical /* Allow the user to vertically resize the textarea (not horizontally) */
+}
+
+/* Style the submit button with a specific background color etc */
+input[type=submit] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* When moving the mouse over the submit button, add a darker green color */
+input[type=submit]:hover {
+    background-color: #45a049;
+}
+
+/* Add a background color and some padding around the form */
+.container {
+    border-radius: 5px;
+    background-color: white;
+    padding: 20px;}
+    .form-control{
+        width:600px;
+        background: transparent;
+        border: none;
+        outline: none;
+        border-bottom: 1px solid gray;
+        color:#fff;
+        font-size:18px;
+        margin-bottom: 16px;
+    }
+    label {
+    display:block;
+    margin-top:20px;
+    letter-spacing:2px;
+}
+/* Centre the page */
+.body {
+    display:block;
+    margin:0 auto;
+    width:576px;
+}
+
+/* Centre the form within the page */
+form {
+    margin:0 auto;
+    width:459px;
+}
+
+/* Style the text boxes */
+input, textarea {
+    width:439px;
+    height:27px;
+    background:#efefef;
+    border:1px solid #dedede;
+    padding:10px;
+    margin-top:3px;
+    font-size:0.9em;
+    color:#3a3a3a;
+}
+
+textarea {
+    height:213px;
+    background:url(images/textarea-bg.jpg) right no-repeat #efefef;
+}
+
+</style>
+</head>
+<body>
+    <!-- <section class="back"></section> -->
+    <form  method="post" action="index.php">
+        Username:<br>
+    <input type="text" name="username"><br> Password<br>
+    <input type="password" name="password"><br>
+    <input type="submit" value="Login">
+</form>
+<ul class="nav">
+    <div class="logo">
+    <a href="#"></a>
+  </div>
+       
+    
+     <li><a href="#menu">Menu</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#bev">Beverages</a></li>
+    <li><a href="#plate"> Plates</a></li>
+    <li><a href="#gal">Gallery</a></li>
+    <li><a href="#con">Contact</a></li>
+    <li style="float:left; font-weight:bold; font-size:40px; padding-bottom:50px;">
+        <a href="#">Naija Soul</a></li>
+  </ul>
+
+</div>
+<h1 class="foodtext">Welcome to Nigerian Soul Food Restauraunt</h1>
+<section class="back"></section>
+<h2 class="foodtext"style="text-align:center;">Stay back and let the rhythm hit your soul and jazz to your maz</h3>
+
+
+<div id=about>
+  <h1 class="foodtext"style="font-size:70px">About Us</h1>
+  <p class="aboutext">Hello my name is Nosakhare Joel Obaseki and I am the owner of Naija Soul.<br>Naija Soul is a combination my Nigerian culture in terms of foood art and all.<br> Also Soul I love jazz and soul music, soul food and it's apart of the things I enjoy. My goal is to share my culture with you in the form of art and food.<br>Naija Soul is dream that will live through me.<br> Also I want the world to know Naija Soul and spread the name all around and abound.</p></p>
+
+
+<div class="flow"></div>
+</div>
+<!-- <p class="aboutext">My goal is to chare my culture with you in the form of art and food.<br>Naija Soul is dream that will live through me.<br> Also I want the world too know Naija Soul and spread the name all around and abound.</p>
+ -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-10 mx-auto col-12 text-center mb-3">
+            <div id="menu">
+            <h1 class="foodtext" style="font-size:70px;padding-right:100px;">Our Menu</h1></div>
+            <p class="lead">Start with our selction of feel good drinks and food. You might even be full by the time you get to our main plates. I wil bring to you a selection of food that I am proud of.A mixture of spicy and sweet for all different seekers.</p>
+        </div>
+        <img src="images/yasu.jpg" height="300" width="500" class="center" >
+        <div class="col-12 mt-4">
+           <div id=bev> <h3 class="text-center" style="font-family: 'Gamja Flower';font-size:70px">Beverages</h3></div>
+            <hr class="accent my-5">
+        </div>
+        <div class="card-columns">
+            <div class="card card-body">
+                <span class="float-right font-weight-bold">$10</span>
+                <h6 class="text-truncate" style="font-family: 'Gamja Flower';font-size:25px">Lemon Squeezed Water</h6>
+                <p class="small">Freshly Squeezed Aged Water.</p>
+            </div>
+            <div class="card card-body">
+                <span class="float-right font-weight-bold">$9</span>
+                <h6 class="text-truncate" style="font-family: 'Gamja Flower';font-size:25px">Summer Breeze Martini</h6>
+                <p class="small">Hendrick’s Gin, St. Germain Elderflower Liqueur and Brancot Sauvignon Blanc with a floater of Cristalino Cava Brut.</p>
+            </div>
+            <div class="card card-body">
+                <span class="float-right font-weight-bold">$9</span>
+                <h6 class="text-truncate" style="font-family: 'Gamja Flower';font-size:25px">Sweet Heat Margarita</h6>
+                <p class="small">Jalapeño infused tequila, triple sec, pineapple juice, lime.</p>
+            </div>
+            <div class="card card-body">
+                <span class="float-right font-weight-bold">$10</span>
+                <h6 class="text-truncate" style="font-family: 'Gamja Flower';font-size:25px">Lemonade </h6>
+                <p class="small">Refreshing sweet tangy drink.</p>
+            </div>
+            <div class="card card-body">
+                <span class="float-right font-weight-bold">$9</span>
+                <h6 style="font-family: 'Gamja Flower';font-size:25px">Classic Martini</h6>
+                <p class="small">Seagrams Gin, Dry Vermouth, pickle juice, olive juice.</p>
+            </div>
+            <div class="card card-body">
+                <span class="float-right font-weight-bold">$10</span>
+                <h6 class="text-truncate" style="font-family: 'Gamja Flower';font-size:25px">Malt</h6>
+                <p class="small">Malta is a lightly carbonated malt beverage, brewed from barley, hops, and water.</p>
+            </div>
+        </div>
+        <img src="images/lemon.jpeg" height="300" width="500" class="center" >
+        <div class="col-12 mt-4">
+            <h3 class="text-center" style="font-family: 'Gamja Flower'; font-size:70px">Starters</h3>
+            <hr class="accent my-5">
+        </div>
+        <div class="card-columns">
+            <div class="card card-body">
+                <span class="float-right font-weight-bold">$9.95</span>
+                <h6 class="text-truncate" style="font-family: 'Gamja Flower'; font-size:20px">Egg-Roll</h6>
+                <p class="small" style="font-family:'indie flower'">Nigerian Egg Roll is a popular Nigerian snack made by wrapping an egg in a sweet flour dough. It is quite similar to Scotch Eggs, which has a layer of sausage meat between the egg and the dough.</p>
+                
+            </div>
+            <div class="card card-body">
+                <span class="float-right font-weight-bold">$8.95</span>
+                <h6 class="text-truncate" style="font-family: 'Gamja Flower';font-size:20px">Meat Pie</h6>
+                <p class="small">The Nigerian meat pie has been a fast food staple in Nigeria and it is such a beautiful piece of snack that is really easy to prepare and quite tasty.</p>
+            </div>
+            <div class="card card-body">
+                <span class="float-right font-weight-bold">$7.95</span>
+                <h6 class="text-truncate" style="font-family: 'Gamja Flower';font-size:20px">Puff-Puff</h6>
+                <p class="small">Nigerian Puff Puff is one Nigerian Snack that you eat and never forget.It is fluffy, spongy, and simply delicious. A lot of folks say it tastes like the  Donut, but not exactly like it.</p>
+                <div class="font-weight-bold small"></div>
+                <div class="font-weight-bold small"></div>
+            </div>
+            <div class="card card-body">
+                <span class="float-right font-weight-bold">$9.95</span>
+                <h6 class="text-truncate" style="font-family: 'Gamja Flower';font-size:20px">Chin Chin</h6>
+                <p class="small">Chin chin are small delicious fried snacks from West Africa that are popular in Nigeria, which are sweetened and flavored with nutmeg</p>
+                
+            </div>
+            <div class="card card-body">
+                <span class="float-right font-weight-bold">$8.95</span>
+                <h6 class="text-truncate"style="font-family: 'Gamja Flower';font-size:20px">Plaintain Chips</h6>
+                <p class="small">
+                    Plantain Chips is a crunchy snack made with either ripe or unripe plantains or a combination of both. It is also known as sweet banana chips and great for all ages. </p>
+            </div>
+            <div class="card card-body">
+                <span class="float-right font-weight-bold">$10</span>
+                <h6 class="text-truncate" style="font-family: 'Gamja Flower';font-size:20px;">Akara</h6>
+                <p class="small">Akara is a fried bean cake snack very popular in Nigeria</p>
+            </div>
+        </div>
+        <img src="images/akara.jpg" height="300" width="500" class="center">
+        <div class="col-12 mt-4">
+            <div id="plate"><h3 class="text-center" style="font-family: 'Gamja Flower'; font-size:70px">Main Plates</h3>
+            <hr class="accent my-5"></div>
+        </div>
+        <div class="card-columns">
+            <div class="card card-body">
+                <span class="float-right font-weight-bold">$17.95</span>
+                <h6 class="text-underline"style="font-family: 'Gamja Flower';font-size:25px;">Pounded Yam Egusi Soup</h6>
+                <p class="small">Pounded Yam is a popular African dish similar to mashed potatoes but heavier. Pounded Yam is very smooth and tasty. It is often eaten with vegetable soup.</p>
+                <span class="font-weight-bold small"></span>
+            </div>
+            <div class="card card-body">
+                <span class="float-right font-weight-bold">$25.95</span>
+                <h6 style="font-family: 'Gamja Flower';font-size:25px;">Jollof Rice</h6>
+                <p class="small">
+                     Delicious Nigerian jollof rice includes long grain parboiled rice, tomatoes and tomato paste, pepper, vegetable oil, onions and stock cubes </p>
+            </div>
+            <div class="card card-body">
+                <span class="float-right font-weight-bold">$15.95</span>
+                <h6 style="font-family: 'Gamja Flower';font-size:25px;">Fried Rice</h6>
+                <p class="small">
+                    Nigerian Fried Rice is a Nigerian party favourite. Most times people cannot choose between Fried Rice and Jollof Rice, they want both on their plates! It is just as delicious as it is popular.</p>
+            </div>
+            <div class="card card-body">
+                <span class="float-right font-weight-bold">$12.95</span>
+                <h6 style="font-family: 'Gamja Flower';font-size:25px;">Suya</h6>
+                <p class="small">
+                    Suya is a spicy meat skewer which is a popular food item in Nigeria.Very juicy and spicy.
+                </p>
+            </div>
+            <div class="card card-body">
+                <span class="float-right font-weight-bold">$25.95</span>
+                <h6 style="font-family: 'Gamja Flower';font-size:25px;">Rice and Stew</h6>
+                <p class="small">
+                    Nigerian tomato stew is a favourite in every Nigerian home and there's nothing as tasty and simple as white rice and tomato stew.</p>
+            </div>
+            <div class="card card-body">
+                <span class="float-right font-weight-bold">$14.95</span>
+                <h6 style="font-family: 'Gamja Flower';font-size:25px;">Pepper Soup</h6>
+                <p class="small">
+                    A thin, very spicy "drinking soup" or broth, chock-full of assorted cuts of meat or fish. Very delicous.
+                </p>
+
+            </div>
+        </div>
+        <img src="images/jollofrice.jpg" height="300" width="500" class="center" >
+        <div class="col-12 mt-4">
+            <hr class="accent my-5">
+
+        </div>
+        
+ -->
+<div class="container gallery-container">
+
+    <div id="gal"><h1 style="font-family: 'Gamja Flower';font-size:75px;">Naija Food Gallery</h1></div>
+
+    
+    
+    <div class="tz-gallery">
+
+        <div class="row">
+
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <a class="lightbox" href="images/yam.jpg">
+                        <img src="images/yam.jpg" alt="Park">
+                    </a>
+                    <div class="caption">
+                        <h3 style="font-family: 'Gamja Flower';font-size:25px; color:green;">Pounded Yam and Egusi Soup</h3>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <a class="lightbox" href="images/stew.jpg">
+                        <img src="images/stew.jpg" alt="rice">
+                    </a>
+                    <div class="caption">
+                        <h3 style="font-family: 'Gamja Flower';font-size:25px; color:green;">Rice and Stew</h3>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <a class="lightbox" href="images/pepperso.jpg">
+                        <img src="images/pepperso.jpg" alt="Tunnel">
+                    </a>
+                    <div class="caption">
+                        <h3 style="font-family: 'Gamja Flower';font-size:25px; ; color:green;">Pepper Soup</h3>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <a class="lightbox" href="images/friedrice.jpg">
+                        <img src="images/friedrice.jpg" alt="rice">
+                    </a>
+                    <div class="caption">
+                        <h3 style="font-family: 'Gamja Flower';font-size:25px; color:green;">Fried Rice</h3>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <a class="lightbox" href="images/beans.jpg">
+                        <img src="images/beans.jpg" alt="Rails">
+                    </a>
+                    <div class="caption">
+                        <h3 style="font-family: 'Gamja Flower';font-size:25px; color:green;">Beans and Plantain</h3>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <a class="lightbox" href="images/meatpie.jpg">
+                        <img src="images/meatpie.jpg" alt="meat pie">
+                    </a>
+                    <div class="caption">
+                        <h3 style="font-family: 'Gamja Flower';font-size:25px; color:green;">Meat Pie</h3>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <a class="lightbox" href="images/moi.jpg">
+                        <img src="images/moi.jpg" alt="rice">
+                    </a>
+                    <div class="caption">
+                        <h3 style="font-family: 'Gamja Flower';font-size:25px; color:green;">Moin Moin</h3>
+                        
+                    </div>
+                </div>
+
+
+
+    </div>
+    <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <a class="lightbox" href="images/akara.jpg">
+                        <img src="images/akara.jpg" alt="rice">
+                    </a>
+                    <div class="caption">
+                        <h3 style="font-family: 'Gamja Flower';font-size:25px; color:green;">Akara</h3>
+                        
+                    </div>
+                </div>
+
+
+</div>
+<div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <a class="lightbox" href="images/egg.jpg">
+                        <img src="images/egg.jpg" alt="rice">
+                    </a>
+                    <div class="caption">
+                        <h3 style="font-family: 'Gamja Flower';font-size:25px; color:green;">   Egg Roll</h3>
+                        
+                    </div>
+                </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
+<script>
+    baguetteBox.run('.tz-gallery');
+</script>
+
+</div>
+<div id="con"><h1 style="font-family: 'Gamja Flower';font-size:75px;">Contact us</h1></div>
+
+ <p style="color:green;">For any questions or concerns regarding our menu or location please contact us. If you want to learn more about our menu or history please register with us to get new updates and questions to be answers </p>
+
+
+ 
+
+
+
+
+    </form>
+</main> 
+</div>
+</div>
+</div>
+</div>
+</h2>
+
+    
+     
+    
+<form method="post" action="index.php">
+        
+    <label>Name</label>
+    <input name="name" placeholder="Type Here">
+            
+    <label>Email</label>
+    <input name="email" type="email" placeholder="Type Here">
+            
+    <label>Message</label>
+    <textarea name="message" placeholder="Type Here"></textarea>
+            
+    <input id="submit" name="submit" type="submit" value="Submit">
+        
+</form>
+</body>
+</html>
+
+
+
+
+    <footer>
+  Copyright &copy; NosNYCJuuHeard 
+<br><a href = "mailto:nosobaseki@gmail.com">nosobaseki@gmail.com</a>
+
+</footer>
+<script>
+//enabling smooth scroll
+$(function() {
+  $('a[href*="#"]:not([href="#"])').click(function() {
+    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+      var target = $(this.hash);
+      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+      if (target.length) {
+        $('html, body').animate({
+          scrollTop: target.offset().top
+        }, 1000);
+        return false;
+      }
+    }
+  });
+});
+</script>
+</body>
+</html>
