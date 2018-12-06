@@ -1,40 +1,116 @@
+<!-- <?php
+// Always start this first
+session_start();
+
+
+$username="user";
+$password ="password";
+
+if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true){
+    header("Location:index.php");
+}
+    if (isset($_POST['username']) && isset($_POST['password'])){
+     if ($_POST['username'] == $username && $_POST['password'] == $password)
+   {
+        $_SESSION['logged_in'] = true;
+        header("Location: index.php");
+   }
+
+    }
+
+
+
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $message = $_POST['message'];
+    $from = 'From: $email'; 
+    $to = 'nosobaseki@gmail.com'; 
+    $subject = 'Hello';
+    $human = $_POST['human'];
+            
+    $body = "From: $name\n E-Mail: $email\n Message:\n $message";
+                
+    if ($_POST['submit']) {
+    if ($name != '' && $email != '') {
+        if ($human == '4') {                 
+            if (mail ($to, $subject, $body, $from)) { 
+            echo '<p>Your message has been sent!</p>';
+        } else { 
+            echo '<p>Something went wrong, go back and try again!</p>'; 
+        } 
+    } else if ($_POST['submit'] && $human != '4') {
+        echo '<p>You answered the anti-spam question incorrectly!</p>';
+    }
+    } else {
+        echo '<p>You need to fill in all required fields!!</p>';
+    }
+}
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  $name = test_input($_POST["name"]);
+  $email = test_input($_POST["email"]);
+  $message = test_input($_POST["message"]);
+  
+}
+
+function test_input($data) {
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
+}
+
+$to = "nosobaseki@gmail.com";
+    $subject = "You have new mail!";
+    $message = "You have a new signup!\r\n\r\n";
+    $message .= "Name: $name \r\n";
+    $message .= "Email: $email \r\n";
+    $cookie_name = "user";
+$cookie_value = "John Doe";
+setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // 86400 = 1 day
+?> -->
+
+<!--  -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Naija Soul Resturant</title>
-	<meta charset="utf-8">
-	<link rel="stylesheet" href="proj.css" type="text/css">
-	<link href='https://fonts.googleapis.com/css?family=Gamja Flower' rel='stylesheet'>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css" />
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <title>Naija Soul Resturant</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="proj.css" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Gamja Flower' rel='stylesheet'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=Droid+Sans:400,700" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.css">
     <link rel="stylesheet" href="thumbnail-gallery.css">
+    <iframe width="0" height="0" src="davido.mp3" frameborder="0" allowfullscreen></iframe>
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
+    
 <style>
-	
-		 .nav{
-	/*background-color: #ffffff;*/
-	color:white;
-	list-style: none;
-	text-align: right;
-	padding: 20px 0 25px 0;}
-	.nav > li{
-		display: inline-block;
-		padding:0 25px 0 25px;
-	    /*font-family: "Chalkduster", fantasy;*/
-	    /*font-family: 'Kumar One Outline';*/
-	    font-family: 'Gamja Flower';
-	    font-size: 15px;
-	}
-		.nav > li > a {
-			text-decoration: none;
-			color:green;
-			float: right;}
-	.nav > li > a:hover{
-		color:#c1c1c1;}
-	}
-	}
+    
+         .nav{
+    /*background-color: #ffffff;*/
+    color:white;
+    list-style: none;
+    text-align: right;
+    padding: 20px 0 25px 0;}
+    .nav > li{
+        display: inline-block;
+        padding:0 25px 0 25px;
+        /*font-family: "Chalkduster", fantasy;*/
+        /*font-family: 'Kumar One Outline';*/
+        font-family: 'Gamja Flower';
+        font-size: 15px;
+    }
+        .nav > li > a {
+            text-decoration: none;
+            color:green;
+            float: right;}
+    .nav > li > a:hover{
+        color:#c1c1c1;}
+    }
+    }
 }
 .resta{
 
@@ -63,7 +139,8 @@
                height:100vh;
                background-attachment: fixed;
               width:100%;}
- body {color:green;}
+ body {color:green;
+       background-color: }
  footer {
 /*   position: fixed;*/
    left: 0;
@@ -77,49 +154,133 @@
 footer a {
     text-decoration: none;
 }
+input[type=text], select, textarea {
+    width: 100%; /* Full width */
+    padding: 12px; /* Some padding */  
+    border: 1px solid #ccc; /* Gray border */
+    border-radius: 4px; /* Rounded borders */
+    box-sizing: border-box; /* Make sure that padding and width stays in place */
+    margin-top: 6px; /* Add a top margin */
+    margin-bottom: 16px; /* Bottom margin */
+    resize: vertical /* Allow the user to vertically resize the textarea (not horizontally) */
+}
+
+/* Style the submit button with a specific background color etc */
+input[type=submit] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* When moving the mouse over the submit button, add a darker green color */
+input[type=submit]:hover {
+    background-color: #45a049;
+}
+
+/* Add a background color and some padding around the form */
+.container {
+    border-radius: 5px;
+    background-color: white;
+    padding: 20px;}
+    .form-control{
+        width:600px;
+        background: transparent;
+        border: none;
+        outline: none;
+        border-bottom: 1px solid gray;
+        color:#fff;
+        font-size:18px;
+        margin-bottom: 16px;
+    }
+    label {
+    display:block;
+    margin-top:20px;
+    letter-spacing:2px;
+}
+/* Centre the page */
+.body {
+    display:block;
+    margin:0 auto;
+    width:576px;
+}
+
+/* Centre the form within the page */
+form {
+    margin:0 auto;
+    width:459px;
+}
+
+/* Style the text boxes */
+input, textarea {
+    width:439px;
+    height:27px;
+    background:#efefef;
+    border:1px solid #dedede;
+    padding:10px;
+    margin-top:3px;
+    font-size:0.9em;
+    color:#3a3a3a;
+}
+
+textarea {
+    height:213px;
+    background:url(images/textarea-bg.jpg) right no-repeat #efefef;
+}
+
 </style>
 </head>
 <body>
-	<!-- <section class="back"></section> -->
+    <!-- <section class="back"></section> -->
+    <form  method="post" action="index.php">
+        Username:<br>
+    <input type="text" name="username"><br> Password<br>
+    <input type="password" name="password"><br>
+    <input type="submit" value="Login">
+</form>
 <ul class="nav">
     <div class="logo">
     <a href="#"></a>
   </div>
        
     
-     <li><a href="sport.html">Menu</a></li>
-    <li><a href="sites.html">About</a></li>
-    <li><a href="gallery.html"> Contact</a></li>
-    <li><a href="index.html">Home</a></li>
-    <li><a href="index.html">Gallery</a></li>
+     <li><a href="#menu">Menu</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#bev">Beverages</a></li>
+    <li><a href="#plate"> Plates</a></li>
+    <li><a href="#gal">Gallery</a></li>
+    <li><a href="#con">Contact</a></li>
     <li style="float:left; font-weight:bold; font-size:40px; padding-bottom:50px;">
-    	<a href="#">Naija Soul</a></li>
+        <a href="#">Naija Soul</a></li>
   </ul>
 
 </div>
 <h1 class="foodtext">Welcome to Nigerian Soul Food Restauraunt</h1>
 <section class="back"></section>
-<h2 class="foodtext"style="text-align:center;">Stay back and elt the rhymn hit your soul and jazz to your maz</h3>
+<h2 class="foodtext"style="text-align:center;">Stay back and let the rhythm hit your soul and jazz to your maz</h3>
 
 
-
+<div id=about>
   <h1 class="foodtext"style="font-size:70px">About Us</h1>
-  <p class="aboutext">Hello my name is Nosakhare Joel Obaseki and I am the owner of Naija Soul.<br>Naija Soul is a combination my Nigerian culture in terms of foood art and all.<br> Also Soul Ilove jazz and soul music, soul food and it's apart of the things I enjoy.My goal is to chare my culture with you in the form of art and food.<br>Naija Soul is dream that will live through me.<br> Also I want the world too know Naija Soul and spread the name all around and abound.</p></p>
+  <p class="aboutext">Hello my name is Nosakhare Joel Obaseki and I am the owner of Naija Soul.<br>Naija Soul is a combination my Nigerian culture in terms of foood art and all.<br> Also Soul I love jazz and soul music, soul food and it's apart of the things I enjoy. My goal is to share my culture with you in the form of art and food.<br>Naija Soul is dream that will live through me.<br> Also I want the world to know Naija Soul and spread the name all around and abound.</p></p>
 
 
 <div class="flow"></div>
-
+</div>
 <!-- <p class="aboutext">My goal is to chare my culture with you in the form of art and food.<br>Naija Soul is dream that will live through me.<br> Also I want the world too know Naija Soul and spread the name all around and abound.</p>
  -->
 <div class="container">
     <div class="row">
         <div class="col-lg-10 mx-auto col-12 text-center mb-3">
-            <h1 class="foodtext" style="font-size:70px">Our Menu</h1>
-            <p class="lead">Start with our selction of feel good drinks and food. You might even be full by the time you get to our main plates. I wil bring to you a selction of food that I am proud off.A mixture of spicy and sweet for all different seekers.</p>
+            <div id="menu">
+            <h1 class="foodtext" style="font-size:70px;padding-right:100px;">Our Menu</h1></div>
+            <p class="lead">Start with our selction of feel good drinks and food. You might even be full by the time you get to our main plates. I wil bring to you a selection of food that I am proud of.A mixture of spicy and sweet for all different seekers.</p>
         </div>
         <img src="images/yasu.jpg" height="300" width="500" class="center" >
         <div class="col-12 mt-4">
-            <h3 class="text-center" style="font-family: 'Gamja Flower';font-size:70px">Beverages</h3>
+           <div id=bev> <h3 class="text-center" style="font-family: 'Gamja Flower';font-size:70px">Beverages</h3></div>
             <hr class="accent my-5">
         </div>
         <div class="card-columns">
@@ -196,10 +357,10 @@ footer a {
                 <p class="small">Akara is a fried bean cake snack very popular in Nigeria</p>
             </div>
         </div>
-        <img src="images/akara.jpg" height="300" width="500" class="center" >
+        <img src="images/akara.jpg" height="300" width="500" class="center">
         <div class="col-12 mt-4">
-            <h3 class="text-center" style="font-family: 'Gamja Flower'; font-size:70px">Main Plates</h3>
-            <hr class="accent my-5">
+            <div id="plate"><h3 class="text-center" style="font-family: 'Gamja Flower'; font-size:70px">Main Plates</h3>
+            <hr class="accent my-5"></div>
         </div>
         <div class="card-columns">
             <div class="card card-body">
@@ -247,24 +408,11 @@ footer a {
             <hr class="accent my-5">
 
         </div>
-        <!-- <div class="col-6 mx-auto">
-            <div class="card card-body text-center">
-                <h5 class="text-uppercase">Tuesday Only!</h5>
-                <h6 style="font-family: 'Gamja Flower';font-size:25px;">Albondigas Soup</h6>
-                <p class="small">
-                    A steaming cup or bowl of Mexican meatball &amp; vegetable soup garnished with crispy tortilla strips and fresh cheddar-Jack cheese. If you like Mexican food try this!</p>
-                <span class="float-right font-weight-bold">$7</span>
-
-            </div>
-        </div>
-
-        <div class="col-12 mt-4">
-            <hr class="accent my-5">
-        </div>
+        
  -->
 <div class="container gallery-container">
 
-    <h1 style="font-family: 'Gamja Flower';font-size:75px;">Naija Food Gallery</h1>
+    <div id="gal"><h1 style="font-family: 'Gamja Flower';font-size:75px;">Naija Food Gallery</h1></div>
 
     
     
@@ -296,7 +444,7 @@ footer a {
             </div>
             <div class="col-sm-6 col-md-4">
                 <div class="thumbnail">
-                    <a class="lightbox" href="/images/pepperso.jpg">
+                    <a class="lightbox" href="images/pepperso.jpg">
                         <img src="images/pepperso.jpg" alt="Tunnel">
                     </a>
                     <div class="caption">
@@ -318,7 +466,7 @@ footer a {
             </div>
             <div class="col-sm-6 col-md-4">
                 <div class="thumbnail">
-                    <a class="lightbox" href="/images/beans.jpg">
+                    <a class="lightbox" href="images/beans.jpg">
                         <img src="images/beans.jpg" alt="Rails">
                     </a>
                     <div class="caption">
@@ -368,11 +516,11 @@ footer a {
 </div>
 <div class="col-sm-6 col-md-4">
                 <div class="thumbnail">
-                    <a class="lightbox" href="images/friedrice.jpg">
-                        <img src="images/friedrice.jpg" alt="rice">
+                    <a class="lightbox" href="images/egg.jpg">
+                        <img src="images/egg.jpg" alt="rice">
                     </a>
                     <div class="caption">
-                        <h3 style="font-family: 'Gamja Flower';font-size:25px; color:green;">Fried Rice</h3>
+                        <h3 style="font-family: 'Gamja Flower';font-size:25px; color:green;">   Egg Roll</h3>
                         
                     </div>
                 </div>
@@ -383,160 +531,68 @@ footer a {
 </script>
 
 </div>
-<h1 style="font-family: 'Gamja Flower';font-size:75px;">Contact us</h1>
+<div id="con"><h1 style="font-family: 'Gamja Flower';font-size:75px;">Contact us</h1></div>
 
  <p style="color:green;">For any questions or concerns regarding our menu or location please contact us. If you want to learn more about our menu or history please register with us to get new updates and questions to be answers </p>
 
 
-<!-- <?php
-// define variables and set to empty values
-$nameErr = $emailErr = $genderErr = $websiteErr = "";
-$name = $email = $gender = $comment = $website = "";
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  if (empty($_POST["name"])) {
-    $nameErr = "Name is required";
-  } else {
-    $name = test_input($_POST["name"]);
-    // check if name only contains letters and whitespace
-    if (!preg_match("/^[a-zA-Z ]*$/",$name)) {
-      $nameErr = "Only letters and white space allowed"; 
-    }
-  }
-
-  if (empty($_POST["email"])) {
-    $emailErr = "Email is required";
-  } else {
-    $email = test_input($_POST["email"]);
-    // check if e-mail address is well-formed
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-      $emailErr = "Invalid email format"; 
-    }
-  }
-
-  if (empty($_POST["website"])) {
-    $website = "";
-  } else {
-    $website = test_input($_POST["website"]);
-    // check if URL address syntax is valid (this regular expression also allows dashes in the URL)
-    if (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i",$website)) {
-      $websiteErr = "Invalid URL"; 
-    }
-  }
-
-  if (empty($_POST["comment"])) {
-    $comment = "";
-  } else {
-    $comment = test_input($_POST["comment"]);
-  }
-
-  if (empty($_POST["gender"])) {
-    $genderErr = "Gender is required";
-  } else {
-    $gender = test_input($_POST["gender"]);
-  }
-}
-?>
+ 
 
 
- -->
- <!-- <form action="//submit.form" id="SignUp100" method="post" onsubmit="return ValidateForm(this);">
-<script type="text/javascript">
-function ValidateForm(frm) {
-if (frm.FirstName.value == "") { alert('First Name is required.'); frm.FirstName.focus(); return false; }
-if (frm.LastName.value == "") { alert('Last Name is required.'); frm.LastName.focus(); return false; }
-if (frm.FromEmailAddress.value == "") { alert('Email address is required.'); frm.FromEmailAddress.focus(); return false; }
-if (frm.FromEmailAddress.value.indexOf("@") < 1 || frm.FromEmailAddress.value.indexOf(".") < 1) { alert('Please enter a valid email address.'); frm.FromEmailAddress.focus(); return false; }
-if (frm.StreetAddress1.value == "") { alert('Address is required.'); frm.StreetAddress1.focus(); return false; }
-if (frm.City.value == "") { alert('City is required.'); frm.City.focus(); return false; }
-if (frm.Country.value == "") { alert('Country is required.'); frm.Country.focus(); return false; }
-return true; }
-</script>
-<table border="0" cellpadding="5" cellspacing="0" width="600">
-<tr> <td>
-<label for="FirstName">First</label>, <label for="LastName">Last Name*:</label>
-</td> <td>
-<input name="FirstName" type="text" maxlength="60" style="width: 146px;" />
-<input name="LastName" type="text" maxlength="60" style="width: 146px;" />
-</td> </tr> <tr> <td>
-<label for="Organization">Organization:</label>
-</td> <td>
-<input name="Organization" type="text" maxlength="60" style="width: 300px;" />
-</td> </tr> <tr> <td>
-<label for="FromEmailAddress">Email address*:</label>
-</td> <td>
-<input name="FromEmailAddress" type="text" maxlength="60" style="width: 300px;" />
-</td> </tr> <tr> <td>
-<label for="WorkPhone">Work Phone:</label>
-</td> <td>
-<input name="WorkPhone" type="text" maxlength="43" style="width: 250px;" />
-</td> </tr> <tr> <td>
-<label for="HomePhone">Home Phone:</label>
-</td> <td>
-<input name="HomePhone" type="text" maxlength="43" style="width: 250px;" />
-</td> </tr> <tr> <td>
-<label for="CellPhone">Cell Phone:</label>
-</td> <td>
-<input name="CellPhone" type="text" maxlength="43" style="width: 250px;" />
-</td> </tr> <tr> <td>
-<label for="Fax">Fax:</label>
-</td> <td>
-<input name="Fax" type="text" maxlength="43" style="width: 250px;" />
-</td> </tr> <tr> <td>
-<label for="StreetAddress1">Address 1*:</label>
-</td> <td>
-<input name="StreetAddress1" type="text" maxlength="120" style="width: 350px;" />
-</td> </tr> <tr> <td>
-<label for="StreetAddress2">Address 2:</label>
-</td> <td>
-<input name="StreetAddress2" type="text" maxlength="120" style="width: 350px;" />
-</td> </tr> <tr> <td>
-<label for="City">City*:</label>
-</td> <td>
-<input name="City" type="text" maxlength="120" style="width: 300px;" />
-</td> </tr> <tr> <td>
-<label for="State">State/Province:</label>
-</td> <td>
-<input name="State" type="text" maxlength="120" style="width: 300px;" />
-</td> </tr> <tr> <td>
-<label for="Zip">Zip/Postal Code:</label>
-</td> <td>
-<input name="Zip" type="text" maxlength="30" style="width: 100px;" />
-</td> </tr> <tr> <td>
-<label for="Country">Country*:</label>
-</td> <td>
-<input name="Country" type="text" maxlength="120" style="width: 300px;" />
-</td> </tr> <tr> <td>
-* - required fields
-</td> <td>
-<div style="float: right">
-<a href="https://www.100forms.com" id="lnk100" title="form to email">form to email</a></div>
-<script src="https://www.100forms.com/js/FORMKEY:UBPHB74KN5EF/SEND:my@email.com" type="text/javascript"></script>
-<input name="skip_Submit" type="submit" value="Submit" />
-</td> </tr>
-</table>
+
+
+    </form>
+</main> 
+</div>
+</div>
+</div>
+</div>
+</h2>
+
+    
+     
+    
+<form method="post" action="index.php">
+        
+    <label>Name</label>
+    <input name="name" placeholder="Type Here">
+            
+    <label>Email</label>
+    <input name="email" type="email" placeholder="Type Here">
+            
+    <label>Message</label>
+    <textarea name="message" placeholder="Type Here"></textarea>
+            
+    <input id="submit" name="submit" type="submit" value="Submit">
+        
 </form>
- -->
-
-<main>
-	<p> SEND E-MAIL</p>
-	<form class="contact-form" action="contactform.php" method="post"> 
-    <input type="text" name="name" placeholder="Full name">
-    <input type="text" name="mail" placeholder="Your Email">
-    <input type="text" name="subject" placeholder="Subject">
-    <textarea name="message" placeholder="Message"></textarea>
-    <button type="submit" name="submit">SEND MAIL</button>
-
-	</form>
-</main>
+</body>
+</html>
 
 
 
 
-	<footer>
+    <footer>
   Copyright &copy; NosNYCJuuHeard 
 <br><a href = "mailto:nosobaseki@gmail.com">nosobaseki@gmail.com</a>
 
 </footer>
+<script>
+//enabling smooth scroll
+$(function() {
+  $('a[href*="#"]:not([href="#"])').click(function() {
+    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+      var target = $(this.hash);
+      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+      if (target.length) {
+        $('html, body').animate({
+          scrollTop: target.offset().top
+        }, 1000);
+        return false;
+      }
+    }
+  });
+});
+</script>
 </body>
 </html>
